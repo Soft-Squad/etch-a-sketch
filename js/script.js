@@ -1,20 +1,15 @@
 // Constants
 const gridContainer = document.getElementById("grid-container");
-let rows = document.getElementsByClassName("gridRow");
-let columns = document.getElementsByClassName("columnCell")
 
-function createDefaultGrid() {
-    // Rows
-    for (let i = 0; i < 16; i++) {
-        let row = document.createElement("div");
-        gridContainer.appendChild(row).className = "gridrow";
-    }
+function createDefaultGrid(rows, cols) {
+    gridContainer.style.setProperty('--grid-rows', rows);
+    gridContainer.style.setProperty('--grid-cols', cols);
 
-    // Columns
-    for (let j = 0; j < rows.length; j++) {
-        for (let k = 0; k < 16; k++) {
-            let column = document.createElement("div");
-            rows[i].appendChild(column).className = "columnCell";
-        }
+    for (let c = 0; c < (rows * cols); c++) {
+        let cell = document.createElement("div");
+        cell.innerText = (c + 1);
+        gridContainer.appendChild(cell).className = "grid-item";
     }
 }
+
+createDefaultGrid(16, 16)     // Start

@@ -1,5 +1,6 @@
 // Constants
 const gridContainer = document.getElementById("grid-container");
+const slider = document.getElementById("myRange");
 
 function createDefaultGrid(rows, cols) {
     gridContainer.style.setProperty('--grid-rows', rows);

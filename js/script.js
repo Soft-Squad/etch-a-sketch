@@ -1,26 +1,70 @@
 // Constants
+const DEFAULT_COLOR = "#FF7F50";    // Coral
+const DEFAULT_SIZE = 16;
+
+let currentColor = DEFAULT_COLOR;
+let currentSize = DEFAULT_SIZE;
+
+function setCurrentColor(newColor) {
+    currentColor = newColor;
+}
+
+function setCurrentSize(newSize) {
+    currentSize = newSize;
+}
+
+const colorPicker = document.getElementById("colorPicker");
+const clearBtn = document.getElementById("clearBtn");
+const slider = document.getElementById("sizeSlider");
+const sliderValue = document.getElementById("sliderValue");
 const gridContainer = document.getElementById("grid-container");
-const slider = document.getElementById("myRange");
 
-function createDefaultGrid(rows, cols) {
-    gridContainer.style.setProperty('--grid-rows', rows);
-    gridContainer.style.setProperty('--grid-cols', cols);
+colorPicker.oninput = (e) => setCurrentColor(e.target.color);
+slider.onmousemove = (e) => updateGridSize(e.target.value);
+slider.onchange = (e) => changeSize(e.target.value);
+clearBtn.onclick = () => reloadGrid();
 
-    for (let c = 0; c < (rows * cols); c++) {
+let mouseDown = false;
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
+
+function changeSize(value) {
+    setCurrentSize(value);
+    updateGridSize(value);
+    reloadGrid();
+}
+
+function updateGridSize(value) {
+    sliderValue.innerHTML = `${value} x ${value}`
+}
+
+function reloadGrid() {
+    clearGrid();
+    setGrid(currentSize);
+}
+
+function clearGrid() {
+    gridContainer.innerHTML = '';
+}
+
+function setGrid(size) {
+    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr`;
+    gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+    for (let i = 0; i < size * size; i++) {
         let cell = document.createElement("div");
-        cell.innerText = (c + 1);
-        gridContainer.appendChild(cell).className = "gridCell";
+        cell.classList.add("grid-cell");
+        cell.addEventListener('mouseover', changeColor);
+        cell.addEventListener('mousedown', changeColor);
+        gridContainer.appendChild(cell);
     }
 }
 
-createDefaultGrid(16, 16)     // Start
+function changeColor(e) {
+    if (e.type === 'mouseover' && !mouseDown) return;
+    e.target.style.backgroundColor = currentColor;
+}   
 
-let gridItem = document.getElementsByClassName("gridCell");
-for (const cell of gridItem) {
-    cell.addEventListener('mouseover', function(e) {
-        e.target.style.background = 'coral';
-    });
-    cell.addEventListener('mouseout', function(e) {
-        e.target.style.background = '';
-    })
-};
+window.onload = () => {
+    setGrid(DEFAULT_SIZE)     // Start
+}

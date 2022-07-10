@@ -4,19 +4,38 @@
 }
 
 body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+
+h1 {
+    line-height: 1.2;
+}
+
+.header {
+    padding: 30px 0;
+}
+
+.title {
     text-align: center;
+    font-size: 80px;
 }
 
 .body-container {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
+    justify-content: flex-start;
+    gap: 100px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .slide-container {
     display: flex;
     flex-direction: column;
     align-content: center;
+    gap: 30px;
+    width: 200px;
 }
 
 .slider {
@@ -50,7 +69,8 @@ body {
 
 #grid-container {
     display: grid;
-    gap: 0;
+    width: 500px;
+    height: 500px;
     grid-template-rows: repeat(var(--grid-rows), 1fr);
     grid-template-columns: repeat(var(--grid-cols), 1fr);
 

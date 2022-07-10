@@ -19,7 +19,7 @@ const slider = document.getElementById("sizeSlider");
 const sliderValue = document.getElementById("sliderValue");
 const gridContainer = document.getElementById("grid-container");
 
-colorPicker.oninput = (e) => setCurrentColor(e.target.color);
+colorPicker.oninput = (e) => setCurrentColor(e.target.value);
 slider.onmousemove = (e) => updateGridSize(e.target.value);
 slider.onchange = (e) => changeSize(e.target.value);
 clearBtn.onclick = () => reloadGrid();

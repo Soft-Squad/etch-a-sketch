@@ -1,15 +1,48 @@
 :root {
-    --grid-cols: 1;
-    --grid-rows: 1;
+    --primary-dark: #333;
+    --primary-light: #ededed;
+    --secondary-light: #fefefe;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 body {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
 }
 
 h1 {
     line-height: 1.2;
+}
+
+button,
+input {
+    width: 100%;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+button {
+    padding: 10px 20px;
+    border: 1px solid var(--primary-dark);
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+    color: var(--secondary-light);
 }
 
 .header {
@@ -28,6 +61,7 @@ h1 {
     gap: 100px;
     max-width: 1100px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .slide-container {
@@ -71,15 +105,11 @@ h1 {
     display: grid;
     width: 500px;
     height: 500px;
-    grid-template-rows: repeat(var(--grid-rows), 1fr);
-    grid-template-columns: repeat(var(--grid-cols), 1fr);
-
+    background-color: var(--secondary-light);
     border: 2px solid black;
     border-radius: 5px;
 }
 
-.gridCell {
-    padding: 1em;
-    border: 1px solid #ddd;
-    text-align: center;
+.grid-cell {
+    user-select: none;
 }
